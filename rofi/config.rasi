@@ -1,0 +1,22 @@
+@theme "/usr/share/rofi/themes/sidebar.rasi"
+
+window{
+location: center;
+width: 30%;
+height: 50%;
+font: "Intel One  Mono 10";
+}
+
+configuration {
+modi: "drun,window,filebrowser,Music:~/Code/Scripts/rofimusicplayer.sh,Power:~/Code/Scripts/rofipowermenu.sh";
+font: "Intel One Mono Regular 10";
+disable-history: true;
+hide-scrollbar: true;
+display-drun: " 󱗼 ";
+display-window: "  ";
+display-filebrowser: "  ";
+display-Power: " 󰐥 ";
+display-Music: " 󰎈 ";
+sidebar-mode: true;
+hover-select: true;
+}
