@@ -1,0 +1,111 @@
+/**
+ * ROFI Color theme
+ * User: Qball
+ * Copyright: Dave Davenport
+ */
+
+* {
+    text-color:  #ffeedd;
+    background-color:  rgba(0,0,0,0);
+    dark: #1c1c1c;
+    // Black
+    black:       #303030;
+    lightblack:  #292929;
+    //
+    // Red
+    red:         #cd5c5c;
+    lightred:    #cc5533;
+    //
+    // Green
+    green:       #86af80;
+    lightgreen:  #88cc22;
+    //
+    // Yellow
+    yellow:      #e8ae5b;
+    lightyellow:     #ffa75d;
+    //
+    // Blue
+    blue:      #6495ed;
+    lightblue:     #bfd8ff;
+    //
+    // Magenta
+    magenta:      #deb887;
+    lightmagenta:     #996600;
+    //
+    // Cyan
+    cyan:      #b0c4de;
+    lightcyan:     #b0c4de;
+    //
+    // White
+    white:      #bbaa99;
+    lightwhite:     #ddccbb;
+    //
+    // Bold, Italic, Underline
+    highlight:     bold #ffffff;
+}
+window {
+    location: center;
+    border:  0px 0px 0px 0px;
+    text-color: @lightwhite;
+}
+mode-switcher {
+    border: 0px 0px 0px 0px;
+    background-color: @black;
+    padding: 10px;
+}
+button selected {
+    border-color: @lightwhite;
+    text-color: @lightblue;
+}
+inputbar {
+    background-color: @black;
+    text-color: @lightwhite;
+    padding: 10px;
+    border: 0px 0px 0px 0px;
+}
+mainbox {
+    expand: true;
+    background-color: @lightblack;
+    spacing: 1em;
+}
+listview {
+    padding: 1em 1em 1em 1em;
+    dynamic: false;
+}
+element-text {
+    background-color: @lightblack;
+    text-color:       inherit;
+}
+element selected  normal {
+    background-color: @lightblack;
+    text-color: @lightblue;
+}
+element normal active {
+    background-color: @lightblack;
+    text-color: @blue;
+}
+element normal urgent {
+    text-color: @lightred;
+}
+element alternate normal {
+}
+element alternate active {
+    text-color: @white;
+}
+element alternate urgent {
+    text-color: @red;
+}
+element selected active {
+    text-color: @blue;
+}
+element selected urgent {
+    background-color: @red;
+    text-color: @dark;
+}
+error-message {
+    expand: true;
+    background-color: red;
+    border-color: darkred;
+    border: 2px;
+    padding: 1em;
+}
