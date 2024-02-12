@@ -91,8 +91,8 @@ bindsym $Mod+Mod2+KP_7 workspace $7
 bindsym $Mod+Mod2+KP_8 workspace 8
 
 # switch to next or previous workspace
-bindsym $Mod+Mod1+$left  workspace prev
-bindsym $Mod+Mod1+$right workspace next
+bindsym Mod1+Shift+$left  workspace prev
+bindsym Mod1+Shift+$right workspace next
 
 # move focused container to workspace
 bindsym $Mod+Shift+1 move container to workspace $1; workspace $1
@@ -234,6 +234,9 @@ exec --no-startup-id nitrogen --restore  &
 
 # Startup for locking/i3lock
 exec --no-startup-id xautolock -time 60 -locker 'systemctl suspend' -notify 600 -notifier 'betterlockscreen -l blur | xset dpms force off' &
+
+# Script attached to weather module found in ~/.config/i3/status.sh
+exec --no-startup-id ~/Code/Scripts/weatherget.sh
 
 bar {
 	output			HDMI-0
