@@ -236,18 +236,18 @@ exec --no-startup-id nitrogen --restore  &
 exec --no-startup-id xautolock -time 60 -locker 'systemctl suspend' -notify 600 -notifier 'betterlockscreen -l blur | xset dpms force off' &
 
 # Script attached to weather module found in ~/.config/i3/status.sh
-exec --no-startup-id ~/Code/Scripts/weatherget.sh
+exec_always --no-startup-id ~/Code/Scripts/weatherget.sh
 
 bar {
 	output			HDMI-0
 	status_command		~/.config/i3/status.sh
-	position		top
+	position		bottom
 	mode			dock
+	height			30
 	workspace_buttons	yes
 	tray_output		none
 	strip_workspace_numbers	yes
 	workspace_min_width	50
-	bindsym button1         exec --no-startup-id rofi -show drun
 
 	font pango:		Intel One Mono 10
 

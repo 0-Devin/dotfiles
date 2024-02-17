@@ -1,3 +1,5 @@
+# Requires ttf-nerd-font-symbols for status icons at bottom
+
 while true
 do
 	## Ram & Cpu Module  ################################################################################
@@ -16,27 +18,31 @@ do
 			currentNetwork=$(echo "No Connection")	
 		fi
 
-	networkStrength=$(nmcli -f SIGNAL,IN-USE dev wifi | grep '*' | awk '{first = $1; $1 = ""; print $0, first; }')
-		
+	networkStrength=$(nmcli -f SIGNAL,IN-USE dev wifi | grep '*' | tr -d " *")
+
 		if [[ "$networkStrength" == "" ]]
 		then
-			networkStatus=󰤯
+			networkStatus="󰤯"
 		fi
+
 		if [[ "$networkStrength" -gt 0 ]]
 		then
-			networkStatus=󰤟
+			networkStatus="󰤟"
 		fi
+
 		if [[ "$networkStrength" -gt 24 ]]
 		then
-			networkStatus=󰤢
+			networkStatus="󰤢"
 		fi
+
 		if [[ "$networkStrength" -gt 49 ]]
 		then
-			networkStatus=󰤥
+			networkStatus="󰤥"
 		fi
+
 		if [[ "$networkStrength" -gt 74 ]]
 		then
-			networkStatus=󰤨
+			networkStatus="󰤨"
 		fi
 	## Date/Time Module ##############################################################################
 
@@ -44,30 +50,31 @@ do
 	time=$(date +"%I:%M %p")
 
 	## Music Module #################################################################################
-	#	
-	# cmusState=$(cmus-remote -Q)
-	#	
-	# if [[ "cmus is not running" =~ $cmusState ]]
-	# then
-	#	musicPlayer=""
-	# fi
-	#	
-	# artist=$(cmus-remote -Q | awk 'NR==5 {print $3}')
-	# album=$(cmus-remote -Q | awk 'NR==6 {print $3}')
-	# song=$(cmus-remote -Q | awk 'NR==2 {print $2}' | cut -d "/" -f 7)
-	#
-	# musicPlayer=$(echo [ $artist/$album/$song ])
-	# musicAt=$(cmus-remote -Q | echo "scale=2; $(awk 'NR==4 {print $2}')/60" | bc | tr "." ":")
-	# musicLength=$(cmus-remote -Q | echo "scale=2; $(awk 'NR==3 {print $2}')/60" | bc | tr "." ":")
-	#
+
+	playerState=$(pgrep cmus)
+
+	artist=$(playerctl -p cmus metadata | awk 'NR == 3 {print $3}' | tr "_" " ")
+	album=$(playerctl -p cmus metadata | awk 'NR == 5 {print $3}' | tr "_" " ")
+	song=$(playerctl -p cmus metadata | awk 'NR == 4 {print $3}' | sed 's/.mp3//' | tr "_" " ")
+
+	musicPlayer=$(echo [  $artist / 󰗮 $album / 󰎈 $song ])
+
+	if [[ $playerState == "" ]]
+	then
+		musicPlayer=""
+	fi
+
 	## Weather Module ################################################################################
+
 	
-	temp=$(cat /tmp/weather | sed -E 's/^.{15}//'m | awk 'NR == 2 {print $1, $2}')
-	forecast=$(cat /tmp/weather | sed -E 's/^.{15}//'m | awk 'NR == 1 {print $0}')
+	realTemp=$(cat /tmp/weather | awk 'NR == 3 {print $0}' | sed 's/ //')
+	feelTemp=$(cat /tmp/weather | awk 'NR == 4 {print $0}' | sed 's/ //' )
+	forecastSymbol=$(cat /tmp/weather | awk 'NR == 1 {print $0}' | sed 's/ //')
+	forecast=$(cat /tmp/weather | awk 'NR == 2 {print $0}')		
 	
-	
+
 	## Status Bar Output ############################################################################
 
-	echo " [ 󰃰 $date - $time / 󰖐$forecast -  $temp ] [ $networkStatus  $currentNetwork ] [   $cpuAvg /   $usedMem% ]  "
+	echo " $musicPlayer [ 󰃰 $date - $time ] [ $forecast $realTemp ] [ $networkStatus $currentNetwork ] [  $cpuAvg /  $usedMem% ]  "
 	sleep 1
 done
