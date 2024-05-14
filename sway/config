@@ -1,0 +1,250 @@
+# devin's sway config
+
+# border & title
+for_window [app_id="^.*"] border normal, title_format " %app_id |<i> %title</i>"
+
+title_align left
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #303030	#303030 #ffffff #303030   #303030
+client.focused_inactive #292929 #292929 #888888 #292929   #292929
+client.unfocused        #292929 #292929 #888888 #292929   #292929
+client.urgent           #292929 #292929 #ffffff #292929   #292929
+client.placeholder      #292929 #292929 #ffffff #292929   #292929
+
+# gaps
+# gaps outer 36
+# gaps inner 12
+
+# font
+font pango: Intel One Mono 10
+
+# mod key used for most binds
+# Mod1 = Alt
+# Mod4 = Super
+set $Mod Mod4
+
+# direction keys
+set $up k
+set $down j
+set $left h
+set $right l
+
+#############         Bindings           ##################
+
+# launchers
+bindsym Mod1+p exec ~/.config/bemenu/bmenuapp.sh
+
+# kill focused window
+bindsym $Mod+Shift+q kill
+
+# core
+bindsym $Mod+w             exec firefox
+bindsym $Mod+t             exec alacritty
+bindsym $Mod+x		   exec swaylock -c ~/.config/swaylock/config
+
+# audio
+bindsym XF86AudioPlay        exec  playerctl play-pause
+bindsym XF86AudioNext        exec  playerctl next
+bindsym XF86AudioPrev        exec  playerctl previous
+bindsym XF86AudioStop        exec  playerctl stop
+bindsym XF86AudioMute        exec  ~/Code/Bash/volumenotify.sh mute
+bindsym XF86AudioRaiseVolume exec  ~/Code/Bash/volumenotify.sh +5%
+bindsym XF86AudioLowerVolume exec  ~/Code/Bash/volumenotify.sh -5%
+
+# backlight [for laptop]
+bindsym XF86MonBrightnessUp   exec  ~/Code/Bash/brightnessnotify.sh "+"
+bindsym XF86MonBrightnessDown exec  ~/Code/Bash/brightnessnotify.sh "-"
+
+###########          Workspace Bindings          ###############
+
+set $1 1: 󰋜 [ Home ]
+set $2 2:  [ Terminal ]
+set $3 3:  [ Browser ]
+set $4 4:  [ Music ] 
+set $5 5:  [ Calendar ]
+set $6 6:  [ R ]
+set $7 "7"
+
+# switch to workspace
+bindsym $Mod+1 workspace $1
+bindsym $Mod+2 workspace $2
+bindsym $Mod+3 workspace $3
+bindsym $Mod+4 workspace $4
+bindsym $Mod+5 workspace $5
+bindsym $Mod+6 workspace $6
+bindsym $Mod+7 workspace $7
+bindsym $Mod+8 workspace 8
+
+# switch to workspace - numpad alternatives
+bindsym $Mod+Mod2+KP_1 workspace $1
+bindsym $Mod+Mod2+KP_2 workspace $2
+bindsym $Mod+Mod2+KP_3 workspace $3
+bindsym $Mod+Mod2+KP_4 workspace $4
+bindsym $Mod+Mod2+KP_5 workspace $5
+bindsym $Mod+Mod2+KP_6 workspace $6
+bindsym $Mod+Mod2+KP_7 workspace $7
+bindsym $Mod+Mod2+KP_8 workspace 8
+
+# switch to next or previous workspace
+bindsym Mod1+Shift+$left  workspace prev
+bindgesture swipe:right workspace nest
+bindsym Mod1+Shift+$right workspace next
+
+# move focused container to workspace
+bindsym $Mod+Shift+1 move container to workspace $1; workspace $1
+bindsym $Mod+Shift+2 move container to workspace $2; workspace $2
+bindsym $Mod+Shift+3 move container to workspace $3; workspace $3
+bindsym $Mod+Shift+4 move container to workspace $4; workspace $4
+bindsym $Mod+Shift+5 move container to workspace $5; workspace $5
+bindsym $Mod+Shift+6 move container to workspace $6; workspace $6
+bindsym $Mod+Shift+7 move container to workspace $7; workspace $7
+bindsym $Mod+Shift+8 move container to workspace 8; workspace 8
+
+# move focused container to workspace - numpad alternatives
+bindsym $Mod+Shift+Mod2+KP_End   move container to workspace $1; workspace $1
+bindsym $Mod+Shift+Mod2+KP_Down  move container to workspace $2; workspace $2
+bindsym $Mod+Shift+Mod2+KP_Next  move container to workspace $3; workspace $3
+bindsym $Mod+Shift+Mod2+KP_Left  move container to workspace $4; workspace $4
+bindsym $Mod+Shift+Mod2+KP_Begin move container to workspace $5; workspace $5
+bindsym $Mod+Shift+Mod2+KP_Right move container to workspace $6; workspace $7
+bindsym $Mod+Shift+Mod2+KP_Home  move container to workspace 7; workspace 7
+bindsym $Mod+Shift+Mod2+KP_Up    move container to workspace 8; workspace 8
+
+
+##############     Reload configs           ################
+
+# reload the configuration file
+bindsym $Mod+Shift+c reload
+
+############      Container/Window control  ############
+
+# Scratchpad, Floating
+bindsym $Mod+space floating toggle
+floating_modifier $Mod
+
+bindsym $Mod+Shift+z move scratchpad
+bindsym $Mod+z scratchpad show
+
+# change focus
+bindsym $Mod+$left  focus left
+bindsym $Mod+$down  focus down
+bindsym $Mod+$up    focus up
+bindsym $Mod+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $Mod+Left  focus left
+bindsym $Mod+Down  focus down
+bindsym $Mod+Up    focus up
+bindsym $Mod+Right focus right
+
+bindsym $Mod+p focus parent
+bindsym $Mod+c focus child
+
+# move focused window
+bindsym $Mod+Shift+$left  move left  10px
+bindsym $Mod+Shift+$down  move down  10px
+bindsym $Mod+Shift+$up    move up    10px
+bindsym $Mod+Shift+$right move right 10px
+
+# alternatively, you can use the cursor keys:
+bindsym $Mod+Shift+Up    move up    10px
+bindsym $Mod+Shift+Down  move down  10px
+bindsym $Mod+Shift+Left  move left  10px
+bindsym $Mod+Shift+Right move right 10px
+
+# Size
+bindsym Mod1+k   resize shrink height 10 px or 1 ppt
+bindsym Mod1+j  resize grow   height 10 px or 1 ppt
+bindsym Mod1+h  resize shrink width  10 px or 1 ppt
+bindsym Mod1+l resize grow   width  10 px or 1 ppt
+
+# layout toggle, keycode 23 is Tab
+bindcode Mod1+23 layout toggle tabbed split
+bindcode $Mod+23 layout toggle splitv splith
+
+# switch to workspace with urgent window
+focus_on_window_activation urgent
+
+# container layout
+bindsym $Mod+g split h
+bindsym $Mod+v split v
+bindsym $Mod+Shift+t layout tabbed
+bindsym $Mod+Shift+s layout stacking
+bindsym $Mod+Shift+g layout toggle split
+
+default_orientation horizontal
+workspace_layout tabbed
+
+###############      Border & Gaps     ###############
+
+bindsym $Mod+shift+b border toggle
+
+# changing border style
+bindsym $Mod+n border normal
+bindsym $Mod+y border 1pixel
+bindsym $Mod+u border none
+
+# change gaps
+bindsym $Mod+plus                gaps inner current plus  5
+bindsym $Mod+minus               gaps inner current minus 5
+bindsym $Mod+Shift+plus          gaps outer current plus  5
+bindsym $Mod+Shift+minus         gaps outer current minus 5
+bindsym $Mod+Control+plus        gaps inner all     plus  5
+bindsym $Mod+Control+minus       gaps inner all     minus 5
+bindsym $Mod+Control+Shift+plus  gaps outer all     plus  5
+bindsym $Mod+Control+Shift+minus gaps outer all     minus 5
+
+############    application settings   ###############
+
+# Firefox settings
+assign [app_id="firefox"] $3
+for_window [app_id="(?i)(firefox)"] focus
+
+# Enable XWayland for compatibility
+xwayland enable
+
+# Startup for dunst: notification app
+exec_always dunst
+
+# Set up so laptop closure disables primary monitor for desktop use
+# Also, output settings in general
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+output $laptop resolution 1920x1080 position 0,0
+output HDMI-A-1 mode 1920x1080@60Hz position 1920,0
+
+# Startup for wallpaper
+exec swaybg -i ~/Pictures/mountain.jpg -m fill
+
+# Swayidle instructions
+exec swayidle -w \
+	timeout 600 'swaylock -f -c ~/.config/swaylock/config' \
+	timeout 600 'swaymsg "output * dpms off"' \
+		resume 'swaymsg "output * dpms on"' \
+	before-sleep 'swaylock -f -c ~/.config/swaylock/config'
+
+# Script attached to weather module found in ~/.config/sway/status.sh
+exec_always  ~/Code/Bash/weatherget.sh
+
+bar {
+	status_command		~/.config/sway/status.sh
+	position		top
+	mode			dock
+	workspace_buttons	yes
+	tray_output		none
+	strip_workspace_numbers	yes
+	workspace_min_width	50
+
+	font pango:		IntelOneMono 10
+
+	colors {
+		
+		background	#292929
+		statusline	#ffffff
+
+		focused_workspace	#303030	#303030	#ffffff
+		inactive_workspace 	#292929	#292929	#7a7a7a
+	}
+}
