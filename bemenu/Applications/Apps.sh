@@ -1,10 +1,10 @@
 #!/bin/bash
 
-Desktop=$(echo -e "[ Terminal ]\n[ Browser ]\n[ Music ]\n[ Calendar ]\n[ R ]" | bmenu.sh "Apps")
+Desktop=$(echo -e "[ Terminal ]\n[ Browser ]\n[ Music ]\n[ Calendar ]\n[ R ]\n[ OBS ]\n[ Notes ]" | bmenu.sh "Apps")
 
 if [[ "$Desktop" == "[ Terminal ]" ]]
 then
-        swaymsg 'workspace $2; exec /usr/bin/alacritty'
+        swaymsg 'exec alacritty --class Terminal'
 fi
 
 if [[ "$Desktop" == "[ Browser ]" ]]
@@ -14,15 +14,25 @@ fi
 
 if [[ "$Desktop" == "[ Music ]" ]]
 then
-	swaymsg 'workspace $4; exec alacritty -e cmus'
+	swaymsg 'exec alacritty --class Cmus -e cmus'
 fi
 
 if [[ "$Desktop" == "[ Calendar ]" ]]
 then
-	swaymsg 'workspace $5; exec alacritty -e calcurse'
+	swaymsg 'exec alacritty --class Calcurse --title Calendar -e calcurse'
 fi
 
 if [[ "$Desktop" == "[ R ]" ]]
 then
-        swaymsg 'workspace $6; exec alacritty --title "R" -e R'
+        swaymsg 'workspace $6; exec alacritty --class R --title Terminal -e R'
+fi
+
+if [[ "$Desktop" == "[ OBS ]" ]]
+then
+        swaymsg 'workspace $7; exec obs'
+fi
+
+if [[ "$Desktop" == "[ Notes ]" ]]
+then
+        swaymsg 'workspace $8; exec xournalpp'
 fi

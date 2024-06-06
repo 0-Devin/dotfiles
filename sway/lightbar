@@ -1,0 +1,32 @@
+# border & title
+for_window [app_id="^.*"] border normal 3, title_format " %app_id |<i> %title</i>"
+
+title_align left
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #b5b5b5	#b5b5b5 #5e5e5e #b5b5b5   #b5b5b5
+client.focused_inactive #dedede #dedede #696969 #dedede   #dedede
+client.unfocused        #dedede #dedede #696969 #dedede   #dedede
+client.urgent           #dedede #dedede #696969 #dedede   #dedede
+client.placeholder      #dedede #dedede #696969 #dedede   #dedede
+
+bar {
+	status_command		~/.config/sway/status.sh
+	position		top
+	mode			dock
+	workspace_buttons	yes
+	tray_output		none
+	strip_workspace_numbers	yes
+	workspace_min_width	50
+
+	font pango:		IntelOneMono 10
+
+	colors {
+		
+		background	#dedede
+		statusline	#4f4f4f
+
+		focused_workspace	#b5b5b5	#b5b5b5	#5e5e5e
+		inactive_workspace 	#dedede	#dedede	#696969
+	}
+}

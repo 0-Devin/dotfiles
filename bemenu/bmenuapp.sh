@@ -1,5 +1,5 @@
 #!/bin/bash
 
-app=$(ls ~/Applications/ | sed 's/.sh//' | bmenu.sh ' ')
+app=$(ls /home/devin/.config/bemenu/Applications/ | sed 's/.sh//' | bmenu.sh ' ')
 
-~/Applications/$app.sh
+/home/devin/.config/bemenu/Applications/$app.sh

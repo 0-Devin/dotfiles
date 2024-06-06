@@ -21,7 +21,6 @@ do
 		chargingStatus="="
 	fi
 
-
 	## Network Module ###################################################################################
 
 	currentNetwork=$(nmcli -m tabular -f NAME connection show --active | awk 'NR == 2 {print $0}')
@@ -56,6 +55,7 @@ do
 		then
 			networkStatus="󰤨 "
 		fi
+
 	## Date/Time Module ##############################################################################
 
 	date=$(date +"%A, %b %d")
@@ -63,14 +63,13 @@ do
 
 	## Weather Module ################################################################################
 
-	
 	realTemp=$(cat /tmp/weather | awk 'NR == 3 {print $0}')
 	humidity=$(cat /tmp/weather | awk 'NR == 2 {print $0}')
 	forecast=$(cat /tmp/weather | awk 'NR == 1 {print $0}')		
-	
 
 	## Status Bar Output ############################################################################
 
-	echo " [ 󰃰 $date - $time ] [ $forecast | Hum:$humidity Temp:$realTemp ] [ $networkStatus $currentNetwork] [   $cpuAvg |   $usedMem% ] [ $chargingStatus $currentCapacity% ] "
+	echo " [ 󰃰 $date - $time ] [ $forecast | Hum: $humidity -- Temp: $realTemp ] [ $networkStatus $currentNetwork] [   $cpuAvg |   $usedMem% ] [ $chargingStatus $currentCapacity% ] "
+
 	sleep 
 done
