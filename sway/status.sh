@@ -10,6 +10,8 @@ do
 	
 	cpuAvg=$(cat /proc/loadavg | awk '{print $1}')
 
+        freeStorage=$(df -B G | grep -e /dev/sda3 | awk '{print $4}')
+    
 	## Battery Info Module  #############################################################################
 
 	currentCapacity=$(cat /sys/class/power_supply/BAT0/capacity)
@@ -69,7 +71,7 @@ do
 
 	## Status Bar Output ############################################################################
 
-	echo " [ 󰃰 $date - $time ] [ $forecast | Hum: $humidity -- Temp: $realTemp ] [ $networkStatus $currentNetwork] [   $cpuAvg |   $usedMem% ] [ $chargingStatus $currentCapacity% ] "
+	echo " [ 󰃰 $date - $time ] [ $forecast | Hum: $humidity -- Temp: $realTemp ] [ $networkStatus $currentNetwork] [   $cpuAvg |   $usedMem% |   $freeStorage ] [ $chargingStatus $currentCapacity% ] "
 
 	sleep 
 done

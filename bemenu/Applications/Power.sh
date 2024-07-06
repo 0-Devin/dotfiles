@@ -6,7 +6,6 @@ confirmSelection() {
 	then
             $1
 	else
-            pkill bemenu            	
             ~/.config/bemenu/Power.sh    
         fi
 }
@@ -20,7 +19,7 @@ fi
 
 if [[ "$selection" == "[ Suspend ]" ]]
 then
-	confirmSelection "shutdown -H"
+	confirmSelection "suspend"
 fi
 
 if [[ "$selection" == "[ Reboot ]" ]]

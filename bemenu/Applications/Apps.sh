@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Desktop=$(echo -e "[ Terminal ]\n[ Browser ]\n[ Music ]\n[ Calendar ]\n[ R ]\n[ OBS ]\n[ Notes ]" | bmenu.sh "Apps")
+Desktop=$(echo -e "[ Terminal ]\n[ Browser ]\n[ Music ]\n[ Calendar ]\n[ PictureView ]\n[ Books ]\n[ R ]\n[ OBS ]\n[ Notes ]" | bmenu.sh "Apps")
 
 if [[ "$Desktop" == "[ Terminal ]" ]]
 then
@@ -22,17 +22,28 @@ then
 	swaymsg 'exec alacritty --class Calcurse --title Calendar -e calcurse'
 fi
 
+if [[ "$Desktop" == "[ PictureView ]" ]]
+then
+        pictures=$(for i in ~/Pictures/*;do echo $i | cut -d / -f 5; done | bmenu.sh "Pictures" )
+        feh ~/Pictures/"$pictures"
+fi
+
 if [[ "$Desktop" == "[ R ]" ]]
 then
-        swaymsg 'workspace $6; exec alacritty --class R --title Terminal -e R'
+        swaymsg 'workspace $4; exec alacritty --class R --title Terminal -e R'
 fi
 
 if [[ "$Desktop" == "[ OBS ]" ]]
 then
-        swaymsg 'workspace $7; exec obs'
+        swaymsg 'workspace $5; exec obs'
 fi
 
 if [[ "$Desktop" == "[ Notes ]" ]]
 then
-        swaymsg 'workspace $8; exec xournalpp'
+        swaymsg 'workspace $6; exec xournalpp'
+fi
+
+if [[ "$Desktop" == "[ Books ]" ]]
+then
+    firefox ~/Documents/Books/"$(ls ~/Documents/Books/ | bmenu.sh "Books")"
 fi

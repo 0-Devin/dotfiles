@@ -6,6 +6,8 @@ getList(){
 
 wifiChoice=$(getList | bmenu.sh "Wifi")
 
+echo $wifiChoice
+
 if [[ "$wifiChoice" == "" ]]
 then
     exit
@@ -13,7 +15,7 @@ fi
 
 if [[ Error =~ "$(nmcli dev wifi connect $wifiChoice)" ]]
 then
-    setConnection "$(echo "" | bmenupass.sh)"
+    nmcli dev wifi connect "$(echo $wifiChoice)" password "$(echo "" | bmenupass.sh)"
 else    
     nmcli dev wifi connect $wifiChoice
 fi

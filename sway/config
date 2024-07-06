@@ -21,7 +21,7 @@ set $down j
 set $left h
 set $right l
 
-#############         Bindings           ##################
+## Bindings ##################
 
 # launchers
 bindsym $Mod+m exec ~/.config/bemenu/bmenuapp.sh
@@ -45,16 +45,16 @@ bindsym XF86AudioLowerVolume exec  ~/Code/Bash/volumenotify.sh -5%
 bindsym XF86MonBrightnessUp   exec  ~/Code/Bash/brightnessnotify.sh "+"
 bindsym XF86MonBrightnessDown exec  ~/Code/Bash/brightnessnotify.sh "-"
 
-###########          Workspace Bindings          ###############
+## Workspace Bindings  ###############
 
 set $1 1: 󰋜 [ Home ]
 set $2 2:  [ Terminal ]
 set $3 3:  [ Browser ]
-set $4 4:  [ Music ] 
-set $5 5:  [ Calendar ]
-set $6 6:  [ R ]
-set $7 7: 󰑋 [ OBS ]
-set $8 8:  [ Notes ]
+set $4 4:  [ R ] 
+set $5 5: 󰑋 [ OBS ]
+set $6 6:  [ Notes ]
+set $7 7: 7
+set $8 8: 8
 
 # switch to workspace
 bindsym $Mod+1 workspace $1
@@ -101,12 +101,12 @@ bindsym $Mod+Shift+Mod2+KP_Home  move container to workspace $7; workspace $8
 bindsym $Mod+Shift+Mod2+KP_Up    move container to workspace 8; workspace 8
 
 
-##############     Reload configs           ################
+##  Reload configs ################
 
 # reload the configuration file
 bindsym $Mod+Shift+c reload
 
-############      Container/Window control  ############
+## Container/Window control  ############
 
 # Scratchpad, Floating
 bindsym $Mod+space floating toggle
@@ -165,7 +165,7 @@ bindsym $Mod+Shift+g layout toggle split
 default_orientation horizontal
 workspace_layout tabbed
 
-###############      Border & Gaps     ###############
+## Border & Gaps     ###############
 
 bindsym $Mod+shift+b border toggle
 
@@ -184,7 +184,7 @@ bindsym $Mod+Control+minus       gaps inner all     minus 5
 bindsym $Mod+Control+Shift+plus  gaps outer all     plus  5
 bindsym $Mod+Control+Shift+minus gaps outer all     minus 5
 
-############    application settings   ###############
+## Application Settings   ###############
 
 # Separate settings for application started through bmenu app
 for_window [app_id="firefox"] {
@@ -194,8 +194,8 @@ inhibit_idle focus
 for_window [app_id="Calcurse"] {
 floating enable
 resize set width 50ppt
-move position 0 0 
-move right 959px
+move position 0 0
+move right 480px
 }
 
 for_window [app_id="Cmus"] {
@@ -213,18 +213,13 @@ resize set height 50ppt
 move position center
 }
 
+## Startup Settings ################
+
 # Startup for dunst: notification app
 exec_always dunst
 
-# Set up so laptop closure disables primary monitor for desktop use
-# Also, output settings in general
-set $laptop eDP-1
-output $laptop resolution 1920x1080 position 0,0
-bindswitch --reload --locked lid:on output $laptop disable
-bindswitch --reload --locked lid:off output $laptop enable
-
-# For wacom tablet setup
-input 1386:884:Wacom_Intuos_S_Pad map_to_output $laptop
+# Calendar Start
+exec alacritty --class Calcurse --title Calendar -e calcurse
 
 # Startup for wallpaper
 exec swaybg -i ~/Pictures/mountain1.jpg -m fill
@@ -241,3 +236,17 @@ exec_always  ~/Code/Bash/weatherget.sh
 
 # Include light or dark bar
 include ~/.config/sway/darkbar
+
+## Sway/Hardware Settings ###############
+
+# Set up so laptop closure disables primary monitor for desktop use
+# Also, output settings in general
+set $laptop eDP-1
+output $laptop resolution 1920x1080 position 0,0
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+
+# For wacom tablet setup
+input 1386:884:Wacom_Intuos_S_Pad map_to_output $laptop
+
+
